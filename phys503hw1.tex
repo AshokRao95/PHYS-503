@@ -1,0 +1,252 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{psfrag,amsmath,amsfonts,verbatim,mathtools}
+%\usepackage[margin=.85in]{geometry}
+\usepackage{bookman}
+\usepackage[small,bf]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+\usepackage{commath}
+\usepackage{titlesec}
+\usepackage{courier}
+
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth}
+\AtBeginDocument{\setlength{\rowidth}{3em}}
+
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bfseries R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}} 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\Tr}{\mathop{\bf Tr}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\proj}{\mathop{\bf Proj}}
+\newcommand{\rank}{\mathop{\bf rank}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\zero}{\mathop{\bf 0}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\bf E{}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} 
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\epi}{\mathop{\bf epi}} 
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} 
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\it e.g.}}
+\newcommand{\ie}{{\it i.e.}}
+\newcommand{\etc}{{\it etc.}}
+\bibliographystyle{alpha}
+
+
+
+\title{Homework 1 for Physics  503}
+\author{Ashok M. Rao}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+
+\paragraph{Problem 1}
+\subparagraph{(a)} 
+To obtain the metric components $g_{\mu\nu}$ apply the transformation rule for components of dual vectors ((1.53) in Carroll) which is,
+\[\frac{\partial\phi}{\partial x^{\mu'}} = \frac{\partial x^{\mu}}{\partial x^{\mu'}}\frac{\partial \phi}{\partial x^{\mu}} \]
+These follow from the defined spherical coordinates stated in inverse,
+\begin{align*}
+	dx &= d(r\cos\varphi \sin\theta) \\&= \cos\phi\sin\theta\cdot dr + r(\cos\phi\cos\theta\cdot d\theta - \sin\phi\sin\theta\cdot d\phi) \\ 
+	dy &= d(r\sin\varphi \sin\theta) \\&= \sin\phi\sin\theta\cdot dr + r(\sin\phi\cos\theta\cdot d\theta + \cos\phi\sin\theta\cdot d\phi) \\
+	dz &= d(r\cos\theta) \\&= \cos\theta \cdot dr - r\sin\theta\cdot d\theta \\
+\end{align*}
+The transformed components are found by substitution into $ds^2 = dx^2 + dy^2 + dz^2$ which will be in the form $ds^2 = c_1(r, \theta, \varphi)  dr^2 + c_2(r, \theta, \varphi) d\theta^2 + c_3(r, \theta, \varphi) d\varphi^2$. Collecting terms for the coefficients,
+\begin{align*}
+	c_1 &= \sin^2\theta (\cos^2\varphi + \sin^2\varphi) + \cos^2\theta = 1\\
+	c_2 &= r^2(\cos^2\theta (\cos^2\varphi + \sin^2\varphi) + \sin^2\varphi) = r^2 \\
+	c_3 &= r^2\sin^2\theta(\sin^2\phi + \cos^2\phi) = r^2\sin^2\theta 
+\end{align*}
+Lower order differential $dr d\phi$ and $d\theta d\phi$ cancel when adding $dx^2$ with $dy^2$ since the cross terms cancel leaving only the sum of squares. Likewise for $dr d\theta$ when adding $d z^2$. This leaves,
+\[ds^2 = dr^2 + r^2 d\theta^2 + r^2 \sin^2\theta d\varphi^2\]
+
+\subparagraph{(b)}
+A rotation by $\theta$ in $\reals^2$ is given by,
+\[R(\theta) = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{bmatrix} \]
+The spacetime metric in the rotating coordinates can be found by noting $R(\theta) R(-\theta) = I$ and that only $x, y$ are transformed so that 
+\[\begin{bmatrix}x\\ y\end{bmatrix} =\begin{bmatrix}\cos{\omega t'} & -\sin{\omega t'}\\ \sin{\omega t'} & \cos{\omega t'}\end{bmatrix}\begin{bmatrix}x'\\ y'\end{bmatrix}\]
+given that the rotation $\omega t$ is counterclockwise. It is straightforward that $dt' = dt'$ and $dz' = dz$. Use the change of basis matrix to calculate that
+\begin{align*}
+	dx &= -\omega(x' \sin{\omega t'} + y' \cos{\omega t'}) dt' + \cos{\omega t'} dx' - \sin{\omega t'} dy' \\
+	dy &= \omega(x' \cos{\omega t'} - y' \sin{\omega t'}) dt' + \sin{\omega t'} dx' + \cos{\omega t'} dy' \\
+\end{align*}
+To compute the metric, first assure that the cross terms more or less vanish (so that the rest is easy). These amount to,
+\begin{align*}
+dx^2 &= 2\omega\left[\sin{\omega t'}\cos{\omega t'}(y' dy' - x' dx') + x'\sin^2{\omega t'} dy' - y'\cos^2{\omega t'} dx'\right] - 2\sin{\omega t'}\cos{\omega t'} dx' dy'+(\cdots)\\
+dy^2 &= 2\omega\left[\sin{\omega t'}\cos{\omega t'}(x' dx' - y' dy') - y'\sin^2{\omega t'} dx' + x'\cos^2{\omega t'} dy'\right] + 2\sin{\omega t'}\cos{\omega t'} dx' dy'+(\cdots)
+\end{align*}
+The cancellations are straightforward so that what remains from the cross terms is,
+\begin{align*}
+	dx^2 + dy^2 &= 2\omega(x' dy' - y' dx')dt' + (\cdots)
+\end{align*}
+The squared terms combine into unit coefficient on  $dx', dy'$. The coefficient on $dt'^2$ is $\omega^2(x'^2 + y'^2)$. So $g_{\mu\nu}$ in the ``rotating coordinates" may be written,
+\begin{align*}
+	ds^2 &= -dt^2 + dx^2 + dy^2 + dz^2 \\ 
+	&=  [(-1 + \omega^2(x'^2 + y'^2))]dt'^2 + dx'^2 + dy'^2 + dz'^2 + 2\omega(x' dy' - y' dx')dt'
+\end{align*}
+
+
+\paragraph{Problem 2}
+\subparagraph{(a)} Parametrize the path by $(x, y) = (t, 2t)$. To find the line element,
+\begin{align*}
+	ds^2 &= (1 + x^2)^2 (dx^2 + dy^2) \\
+	&= 5 (1 + t^2)^2(dt^2) \\
+	ds &= \sqrt{5}(1 + t^2) dt
+\end{align*}
+Thus the distance along the linear trajectory between $(-1, -2)$ and $(1, 2)$ corresponds to,
+\[\sqrt{5}\int_{-1}^{1}(1 + t^2) dt = \frac{8\sqrt{5}}{3}\]
+
+\subparagraph{(b)} Consider a more general form of the above, which is a trajectory taking the straight path to the $y$-axis at $(0, -k)$, climbing vertically until $(0, k)$ and then taking the straightest path again to the endpoint.  It is clear that the metric is symmetric so the distances of the first and final leg are equal. A natural parametrization is given by $(x, y) = (t, (2-k) t - k)$. The line element (using the same method as above) is given by
+\begin{align*}
+	ds = \sqrt{1 + (2-k)^2}(1 + t^2) dt 
+\end{align*}
+The second trajectory has the traditional Euclidean metric as it is on the $y$-axis, so that length is clearly $2k$. Compute the overall length as a function of $k$:
+\begin{align*}
+	f(k) &= 2\left(k + \sqrt{1 + (2-k)^2}\int_{-1}^{0}(1+t^2)dt\right) \\
+	&= 2\left(k + \frac{4}{3}\sqrt{1 + (2-k)^2}\right)
+\end{align*}
+Check that this reduces to the answer in (a) for $k=0$. To find a shorter triplet of linear segments, minimize over $k$,
+\begin{align*}
+	\frac{d}{d k}f(k) &= 2 - \frac{8(2-k)}{3\sqrt{1 + (2-k)^2}}
+\end{align*}
+The first order condition on $k^{\star}$ is
+\begin{align*}
+	(2-k^{\star})^2 &= \frac{9}{7}\\
+	k^\star &= 2 - \frac{3}{\sqrt{7}}
+\end{align*}
+The three segments defined by this $k^\star = 2 - 3/\sqrt{7}$ give a final distance of approximately 5.76 or about 5 percent shorter than the straight line.
+
+I suspect the geodesic somewhat resembles the \texttt{arctan}($\cdot$) curve (drawn below).  The idea is that for $x\ll 0$ the trajectory should be horizontally towards the $y$-axis.  For $x\to 0$, the trajectory should be close to the straight line path, since the metric is Euclidean to first-order.
+\newpage 
+\paragraph{Problem 3}
+For the given definitions $x, y$ calculate that
+\begin{align*}
+	dx &= \cos\phi d\theta - \theta\sin\phi d\phi \\
+	dy &= \sin\phi d\theta + \theta\cos\phi d\phi \\
+	dx^2 &= \cos^2{\phi}d\theta^2 + \theta^2 \sin^2\phi d\phi^2 - 2\theta\cos\phi\sin\phi d\theta d\phi \\
+	dy^2 &= \sin^2{\phi}d\theta^2 + \theta^2 \cos^2\phi d\phi^2 + 2\theta\cos\phi\sin\phi d\theta d\phi 
+\end{align*}
+to observe that
+\[dx^2 + dy^2 = d\theta^2 + \theta^2 d\phi^2\]
+Thus the error according to the Euclidean distance without correction would be,
+\[ds^2 - (dx^2 + dy^2) = (\sin^2\theta - \theta^2)d\phi^2 \]
+To find the value of this term in $x, y$ calculate that
+\begin{align*}
+	\sec^2\phi d\phi &= \frac{x dy - y dx}{x^2} \\
+	d\phi^2 &= \left[\cos^2\phi \left(\frac{x dy - y dx}{x^2}\right)\right]^2\\
+	&= \left[\frac{x^2}{\theta^2}\left(\frac{x dy - y dx}{x^2}\right)\right]^2\\
+	&= \left(\frac{x dy - y dx}{\theta^2}\right)^2
+\end{align*}
+The final two lines follow from the definition of $x$ in the given coordinates. Denoting the correction on the length as $d\tilde{s}^2$, resubstitute the $d\phi^2$ term to obtain,
+\begin{align*}
+	d\tilde{s}^2 &= (\sin^2\theta - \theta^2)\frac{(x dy - y dx)^2}{\theta^4} \\
+	&= \left(\frac{\sin^2{\theta}-\theta^2}{\theta^4}\right)(x dy - y dx)^2
+\end{align*}
+Express the coefficient as a correction factor $\varepsilon(\theta)$ wherein
+\begin{align*}
+	\varepsilon(\theta) &= \frac{\sin^2{\theta}-\theta^2}{\theta^4} \\
+	&= \frac{\sin^2{\sqrt{x^2+y^2}}-(x^2 + y^2)}{(x^2 + y^2)^2}
+\end{align*}
+where the expression in terms of $x, y$ uses the fact that $\theta^2 = x^2 + y^2$. The exact metric would then be 
+\begin{align*}
+	ds^2 &=  dx^2 + dy^2 +\frac{\sin^2{\sqrt{x^2+y^2}}-(x^2 + y^2)}{(x^2 + y^2)^2}(x dy - y dx)^2\\
+	&= \left(1 - y^2\frac{\sin^2{\sqrt{x^2+y^2}}-(x^2 + y^2)}{(x^2 + y^2)^2}\right)dx^2 \\&+ \left(1 - x^2\frac{\sin^2{\sqrt{x^2+y^2}}-(x^2 + y^2)}{(x^2 + y^2)^2}\right)dy^2  \\&- \left(\frac{\sin^2{\sqrt{x^2+y^2}}-(x^2 + y^2)}{(x^2 + y^2)^2}\right)2x y dx dy
+\end{align*} 
+The Taylor approximation of $\varepsilon(\theta)$ around $\theta = 0$ is given by,
+\[\tilde{\varepsilon}(\theta) = -\frac{1}{3} + \frac{2\theta^2}{45} - \frac{\theta^4}{315} + O(\theta^6)\]
+The first correction term above corresponds to the suggested metric.  The next order correction includes the additional term,
+\[\epsilon(x, y) = \frac{2(x^2 + y^2)}{45}(x dy - y dx)^2\] 
+which yields the modified metric $ds'^2$ expanded as,
+\[ds'^2 = \left(1 - \frac{17 y^2 + 2 x^2}{45}\right)dx^2 + \left(1 - \frac{17 x^2 + 2 y^2}{45}\right)dy^2 + \frac{2}{3}\left(1 - \frac{2(x^2 + y^2)}{15}\right)(x y dx dy)\]
+ 
+\paragraph{Problem 4}
+Let $R=1$ to simplify the equations. Based on the given coordinates,
+\begin{align*}
+	dx^2 &= d\phi^2 \\
+	dy^2 &= \csc(x)^2 d\theta^2
+\end{align*}
+Therefore,
+\begin{align*}
+	ds^2 &= d\theta^2 + \sin^2\theta d\phi^2 \\
+	&= \sin^2(\theta)\left(\frac{d\theta^2}{\sin^2{\theta}} + d\phi^2\right) \\
+	&=  \sin^2(\theta)(\csc^2\theta d\theta^2 + d\phi^2) \\
+\end{align*}
+Next,
+\begin{align*}
+	e^{y} &= \frac{1}{\tan{(\theta/2)}}\\
+	\theta &= 2\cot^{-1}(e^{-y})\\
+	\Omega^2(x, y) &= \sin^2\left(2\cot^{-1}(e^{-y})\right)
+\end{align*}
+Wolfram Alpha says this becomes $\Omega^2(x, y) = sech^2(y)$.
+\paragraph{Problem 5}
+I was using various online lecture notes to teach myself the essentials of variational calculus, and some parts of this example were derived within (of at least the Beltrami identity, I avoided reading anything on the bead problem). 
+\subparagraph{(a)} Calculate the total derivative given that $L(x, \dot{x})$ has no time dependence,
+\begin{align*}
+	\frac{d L}{d t} &= \frac{\partial L}{\partial x}\frac{ \partial}{\partial t} + 
+	\frac{\partial L}{\partial\dot{x}}\frac{\partial \dot{x}}{\partial t}\\
+	&= \frac{\partial L}{\partial x}\dot{x} + \frac{\partial L}{\partial \dot{x}} \ddot{x}
+\end{align*}
+Substituting the Euler-Lagrange equation that $\frac{\partial L}{\partial x} = \frac{d}{d t}\frac{\partial L}{\partial L}$ obtain:
+\begin{align*}
+	\frac{d L}{d t} &= \frac{d}{d t}\frac{\partial L}{\partial L}\dot{x} + \frac{\partial L}{\partial \dot{x}} \ddot{x}\\
+	&= \frac{d}{d t}\left(\frac{d x}{d t}\frac{\partial L}{\partial \dot{x}}\right)
+\end{align*}
+The last line is by the product rule. Collecting all terms into the LHS yields the required identity,
+\[\frac{d}{d t}\left(L - \dot{x}\frac{\partial L}{\partial \dot{x}}\right)=0\]
+
+
+\subparagraph{(b)}
+Without friction, potential energy is converted into kinetic energy so that at each $y$, 
+\[\frac{1}{2}m v^2 = m g y\implies v = \sqrt{2 g y}\]
+We integrate over the path of the wire, and by dimensional requirements the total time is given as $T = \int_{A}^{B} v^{-1} ds$ where $ds$ gives the line element, and can be found as
+\[ds = \sqrt{dx^2+dy^2} = \sqrt{1 + \left(\frac{dy}{dx}\right)^2}dx=\sqrt{1 + y'^2}dx\]
+The integral then becomes,
+\begin{align*}
+	T &= \frac{1}{\sqrt{2g}}\int_{A}^{B}\sqrt{\frac{1+y'^2}{y}} dx
+\end{align*}
+Earlier we were integrating over arc length and now that is reduced to an integral over horizontal distance; both of these quantities move forward with time. Also note that the integrand excludes any direct dependence on $x$, so the conditions for the Beltrami identity in (a) are met giving:
+\begin{align*}
+	\sqrt{\frac{1+y'^2}{2g y}} - y'\frac{\partial\left(\sqrt{\frac{1+y'^2}{2g y}}\right)}{\partial y'} &= C\\
+	\sqrt{\frac{1+y'^2}{2g y}}- \frac{y'^2}{\sqrt{(2 g y)(1 + y'^2)}} &= C \\
+	\frac{1}{1+ y'^2} &= 2C^2 g y \\
+	y (1 + y'^2) &= \frac{1/g}{2C^2}
+\end{align*}
+This gives the necessary differential equation.
+\subparagraph{(c)} Using the equations given,
+\begin{align*}
+	dx &= \frac{C}{2}(d\theta - \cos{\theta}d\theta)\\
+	d\theta &= \frac{2}{C}\frac{dx}{1 - \cos{\theta}}\\
+	\frac{dy}{dx} &= \frac{\sin{\theta}}{1-\cos{\theta}}\\
+	&=\cot{(\theta/2)}
+\end{align*}
+Now express the differential equation from (b) as
+\begin{align*}
+y' &= \sqrt{\frac{C}{y}-1} \\
+&= \sqrt{\frac{2}{1-\cos{\theta}}-1}\\
+&=\sqrt{\frac{1+\cos{\theta}}{1-\cos{\theta}}}\\
+\frac{dy}{dx}&=\cot{(\theta/2)}
+\end{align*}
+Clearly the conditions are equivalent.
+\end{document}

@@ -1,0 +1,225 @@
+\documentclass[10pt]{scrartcl}
+\usepackage{psfrag,amsmath,amsfonts,verbatim,mathtools}
+%\usepackage[margin=.85in]{geometry}
+\usepackage{fullpage}
+\usepackage[parfill]{parskip}
+\usepackage{bookman}
+\usepackage[small,bf]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+\usepackage{commath}
+\usepackage{titlesec}
+\usepackage{courier}
+\usepackage[hang]{footmisc} 
+\usepackage{caption}
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth}
+\AtBeginDocument{\setlength{\rowidth}{3em}}
+
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bfseries R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}} 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\Tr}{\mathop{\bf Tr}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\proj}{\mathop{\bf Proj}}
+\newcommand{\rank}{\mathop{\bf rank}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\zero}{\mathop{\bf 0}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\bf E{}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} 
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\epi}{\mathop{\bf epi}} 
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} 
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\textit e.g.}}
+\newcommand{\ie}{{\textit i.e.}}
+\newcommand{\etc}{{\it etc.}}
+\bibliographystyle{alpha}
+
+
+\usepackage{amsmath}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arcCot}
+\DeclareMathOperator{\arccsc}{arcCsc}
+\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arcCsch}
+\DeclareMathOperator{\arccoth}{arcCoth} 
+
+
+\usepackage{titling}
+\setlength{\droptitle}{-1cm}
+
+
+
+\title{Homework 2 for Physics  503}
+\author{Ashok M. Rao}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+I studied using Tevian Dray's book on special relativity, and he spends a fair bit of time going through the role of hyperbolic transformation and motion in this context.
+\paragraph{Problem 1}
+Since the interesting activity is only along one spatial dimension, we can omit the unused coordinates, which gives some geometric intuition. Now think of spacetime as the surface of an infinitely long cylindrical tube with circumference $L$\footnote{This rendition is awkward in that it would be something like walking around a cubical ``hall of mirrors", with opposed sides inverted. Trouble with mirror images can be avoided if the period is large enough that it is outside of the lightcone around the origin.} The world line corresponding to $A$, the observer at rest, would be vertical, and that of the constant velocity observer $B$ like a slinky or helix around the surface.   
+
+This points to the possible disagreement, which is that the form of the metric $d\tau^2 = dt^2 - dx^2$ implies that the normal triangle inequality is inverted so that the straightest path maximizes proper time. Therefore the point at which $A$ and $B$ meet again, \ie as the helix intersects the line, would be one at which the resting observer $A$ must be older even though each should be symmetric to the other.  
+
+Let $O$ be the spacetime origin for both observers since this can be simultaneously observed for both observers up to a dummy time constant.  Two light beams emitted in either direction along the $x$-axis serve to identify the period $L$ for the observer at rest since they, by definition, converge at the origin. Let $L'$ be the spacetime point that the moving observer completes one revolution. Let $\beta=\tanh^{-1}{(v/c)}$ so that Lorentz factor $\gamma = \cosh{\beta}$.  Calculate that:
+\[
+	\Delta\tau_{A} =L/\tanh{\beta},\quad\Delta\tau_{B} =(L/\gamma)/v= L/\sinh{\beta}
+\]
+This leads to the disagreement $(\Delta\tau_A /\Delta\tau_B) = \cosh{\beta}$. The invariance property here has to do with the proposed geometry, in that only the rest frame on each point $x\in[0, L]$ maximizes its proper time, and this is also related to the fact that this is the only frame from which the period can be consistently identified by emitting light in either direction. This can also be an experiment. Emit light both ways letting $a$ and $b$ be the proper time at which respectively labeled signals are received. Then we could calculate:
+\[
+\tanh{\beta} = \frac{1 - {b}/{a}}{1 + {b}/{a}}
+\]
+to find relativity respecting the rest frame (and thus detect failure of invariance).
+
+\paragraph{Problem 2} Both observers must agree about the outcome of the experiment after it is concluded due to invariance. At rest, the car fits exactly into the garage, and so $B$ is technically correct though there will be no margin of error. 
+
+To see this, let the rest length of both the car and the garage be $L$ and consider the perspective of $B$ in which $L_{garage} = L$ and $L_{car} = L/\gamma$. Let $P$ and $Q$ respectively denote the rear of the car passing the front of the garage and the front of the car arriving at the rear of the garage. Then (in the frame of the garage) the proper time between $P$ and $Q$ is
+\begin{align}\tau_{PQ} = \frac{L - (L/\gamma)}{v}\end{align}
+ $B$ closes the garage door at $P$, and we may assume that this happens instantaneously in his frame. The question is whether the driver is still trying to drive when he learns about $Q$. Collision requires that the signal reach the end of the garage within $\tau_{PQ}$. At $Q$, in $B$'s frame $L/\gamma$ of the bar is already in the garage, and letting the signal propagate at the speed of light $c=1$,
+\begin{align*}
+	\tau_{PQ} &\geq \frac{L}{\gamma} + v\cdot\tau_{PQ}\\
+	\tau_{PQ}&\geq \frac{L}{\gamma(1-v)}
+\end{align*}
+Where the first line is from finding that the car has moved forward by $v\tau_{PQ}$ over the duration in question, the second by rearranging. Now substitute (1) and using $\beta=\tanh^{-1}{(v/c)}$ and $c=1$, the condition becomes,
+\begin{align}
+1+\frac{v}{1-v}&\leq{\gamma}\\
+\cosh{\beta}-\sinh{\beta}&\geq 1
+\end{align}
+Yet this is impossible for $\beta>0$ and thus no collision can occur. In particular, the driver does not know that the garage is closed at any point before he reaches the end of garage, at which point he will already have stopped. 
+
+The diagram attached describes these chain of events from the garage's point of view. Unfortunately I was in a rush making it, but the point is that, in the garage's frame, there is a minimum waiting time after the driver reaches that the signal can travel back so as to cause a collision.  
+\newpage
+
+\paragraph{Problem 3}
+
+The form of the given metric $g_{\mu\nu}$ has the form of the Riemannian metric  in polar coordinates, but as a difference rather than sum of squares. This suggests hyperbolic rotations, so transform the coordinates like so.\footnote{ To see this explicitly, compute that:
+\begin{align*}
+	ds^2 &= -(\sinh{\eta}\cdot dR + R\cosh{\eta}\cdot d\eta)^2 + (\cosh{\eta}\cdot dR + R\sinh{\eta}\cdot d\eta)^2 + dy^2 + dz^2 \\
+	&= dR^2 - R^2 d\eta^2 + dy^2 + dz^2
+\end{align*}
+I modified $x$ to include the integration factor later to simplify other calculations.}
+\begin{align}
+	x&=R\cosh{\eta}\\
+	t&=R\sinh{\eta}
+\end{align}
+The transformed grid for fixed levels in the new coordinates, $\eta_0$ and $R_0$ can be found as:
+\begin{align}
+	\eta_0 &= \tanh^{-1}{(t/x)}\\
+	R_0 &= \sqrt{x^2 - t^2}
+\end{align}
+On the $(x, t)$ lattice, the coordinate lines corresponding to constant $\eta$ and $R$ respectively correspond to straight lines through the origin approaching the 45 degree line as $\eta\to\infty$, and the set of hyperbolas whose tangents asymptote to this limit. The maximal region described in the new coordinates are events within the lightcone $t=\pm x$. 
+
+Figure 1 describes the coordinate transformation and shows that an observer traveling along a line of constant $R$ cannot ever receive a light signal transmitted at $t=0$ at any point outside of the maximal region (shaded).
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=.25]{rindler}
+\end{center}
+\caption{Transformed coordinate lattice}
+\end{figure}
+The dotted trajectory describes the world line of an initially stationary observer moving along a line of constant $R$ for a fixed period of time. In transformed coordinates the worldline of the emitted signal follows,
+\begin{align}
+dR^2 &= R^2\cdot d\eta^2 \\
+\abs{dR / d\eta}&= R 	
+\end{align}
+from the fact that $dx/dt=c$ implies that $ds^2=0$. Yet (9) need not hold.
+
+Supposing that $dR^2 = 0$, and like everything above that $dx=dy=0$, then
+\begin{align}
+\frac{d\tau}{d\eta} &=\frac{1}{\alpha}
+\end{align}
+so that elapsed time is $\tau(\eta)=\eta/\alpha$. Using the relations from (4) and (5) express this as
+\begin{align}
+	\eta &= \arcsinh{\alpha t}	
+\end{align}
+Inverting returns the transformations as proposed previously. Corresponding this to Figure 1 suggests that $\eta$, in a sense, ``parameterizes" the arc-length of a worldline. The magnitude of the observer's four-acceleration would be
+\begin{align}
+g_{\mu\nu}a^{\mu}a^{\nu} &= \left(\frac{d^2 t}{d\tau^2}\right)^2 - \left(\frac{d^2 x}{d\tau^2}\right)^2 \\
+&= (\alpha\sinh{\eta})^2 - (\alpha\cosh{\eta})^2 \\
+&= -\alpha^2	
+\end{align}
+Thus the worldline described by the constant $R$ coordinate in Figure 1 corresponds to an observer moving with constant four-acceleration $-\alpha^2$ in the $x$ direction. We must also insist that $\alpha>0$ so that the observer is traveling timelike. To extract the spatial component of the acceleration, calculate and expanding around $\eta=0$ to second order,
+\begin{align}
+\ddot{x}	&= \frac{1-\tanh^2{\eta}}{R\cosh{\eta}}\approx \alpha\left[1-\frac{3\eta^2}{2} + \mathcal{O}(\eta^4)\right]
+\end{align}
+which is the non-relativistic limit. Contrarily, as $\eta\to\infty$ the spatial component of acceleration approaches vanishes given the light speed limit.
+ Using now that $g_{\mu\nu}a^{\mu}a^{\nu}=-\alpha^2$ so that $a^\mu = \frac{d u^\mu}{d\tau}$ can be described by standard Lorentz transformations,
+\begin{align}
+\alpha^2 &= -\left[\left(\frac{d}{d\tau}\frac{1}{\sqrt{1-v^2}}\right)^2 - \left(\frac{d}{d\tau}\frac{v}{\sqrt{1-v^2}}\right)\right]	\\
+\alpha &=  \sqrt{\left(\frac{d}{d\tau}\sinh{\beta}\right)^2-\left(\frac{d}{d\tau}\cosh{\beta}\right)^2} =\frac{d\beta}{d\tau}
+\end{align}
+where as before $v=\tanh{\beta}$. Letting $\beta(\tau) = \arctanh{v(\tau)}$, we can integrate over $\tau$ to find $B$'s velocity in $A$'s frame as a function of $B$'s measured time 
+\begin{align}
+	v(\tau) = \tanh{\left(\int_{0}^{\tau'}a(\tau)d\tau + \beta_0\right)}
+\end{align}
+Applying again the Lorentz transformations as used in (17), \ie as hyperbolic rotations, we can calculate components of the line element as a function of $\tau$:
+\begin{align}
+	\Delta t(\tau_B) &= \int_{0}^{\tau_B}\cosh{\left(\int_{0}^{\tau'}a(\tau)d\tau + \beta_0\right)}d\tau'\\
+	\Delta x(\tau_B) &= \int_{0}^{\tau_B}\sinh{\left(\int_{0}^{\tau'}a(\tau)d\tau + \beta_0\right)}d\tau'
+\end{align}   
+Symmetry conditions insist that (20) vanishes and that $\beta_0=0$ such that
+\begin{align}
+\tau_A^2 &=	\left[\int_{0}^{\tau_B}\cosh{\left(\int_{0}^{\tau'}a(\tau)d\tau + \beta_0\right)}d\tau'\right]^2\\
+\tau_A &=\frac{1}{2}\int_{0}^{\tau_B}\left[\exp{\left(\int_{0}^{\tau'}a(\tau)d\tau\right)}+\exp{\left(\int_{0}^{\tau'}-a(\tau)d\tau\right)}\right]d\tau'\\
+ &= \int_{0}^{\tau_B}\exp{\left(\int_{0}^{\tau'}a(\tau)d\tau\right)}d\tau'	
+\end{align}
+Let $T=\tau_B/4$ corresponding to successive phases of acceleration like $\{\alpha,-\alpha,-\alpha,\alpha\}$ and integrating over (23) gives restoring units
+\begin{align}
+\tau_A &=\frac{4c}{\alpha}\sinh{\left(\frac{\alpha T}{c}\right)} = \frac{4c}{\alpha}\sinh{\left(\frac{\alpha\cdot \tau_B}{4c}\right)}
+\end{align}
+If $T = 2$ years then $\tau_A = 12.2$ years and $\tau_b = 8$ years. If $T - 10$ years then $\tau_A = 9606$ years and $\tau_b = 40$ years. The vast difference is due to the (literally) exponential nature of the hyperbolic sine function. In particular, in the second scenario not only is the travelled distance (and thus greater proper distance) larger, but also velocity reaches a much more relativistic level.
+\paragraph{Problem 4}
+In arbitrary dimension $d$ the degrees of freedom of antisymmetric $F_{\mu\nu}$ is the number of independent combinations between each row-column pair that would be $d(d-1)/2$. For a traceless symmetric tensor $h_{\mu\nu}$ we have $d(d+1)/2-1$ where the subtracted term is determined by the other diagonal terms. 
+
+The given properties of $R_{\mu\nu\rho\sigma}$ are:
+\begin{align}
+R_{\mu\nu\rho\sigma} &= -R_{\nu\mu\rho\sigma} = -R_{\mu\nu\sigma\rho}	\\
+&= R_{\rho\sigma\mu\nu}\\
+0&=R_{\mu\nu\rho\sigma}+R_{\mu\rho\sigma\nu} + R_{\mu\sigma\nu\rho} 
+\end{align}
+Calculate degrees of freedom from (25) and (26) as $p$
+\begin{align}
+p=\frac{1}{2}\frac{d(d-1)}{2}\left[\frac{d(d-1)}{2}+1\right] 	
+\end{align}
+This follows by applying (26) as on a tensor with two indices and $d(d-1)/2$ degrees of freedom since (25) defines an antisymmetric tensor.  Calculate the additional constraints given through (27) by first noting that each term defined is an odd permutation off the other. Since there are three terms, the entire relationship is antisymmetric under exchange of any two indices. Denote this $q$
+\begin{align}
+q  = \frac{(d)_4}{4!}	
+\end{align}
+where $(\cdot)$ gives the falling factorial. 
+Subtract for
+\begin{align}
+r &= p - q\\
+&= 	\frac{1}{2}\frac{d(d-1)}{2}\left[\frac{d(d-1)}{2}+1\right] - \frac{d(d-1)(d-2)(d-3)}{24}\\
+&= 	\frac{d^2(d-1)^2}{8}+\frac{d(d-1)}{4}+1 - \frac{d(d-1)(d-2)(d-3)}{24}\\
+&= \frac{d^2(d+1)(d-1)}{12}
+\end{align}
+For $d=4$ this results in $(15\cdot 16/12) = 20$ degrees of freedom.
+
+\end{document}

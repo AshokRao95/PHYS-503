@@ -1,0 +1,231 @@
+\documentclass[10pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{psfrag,amsmath,amsfonts,verbatim,mathtools}
+%\usepackage[margin=.85in]{geometry}
+\usepackage{fullpage}
+\usepackage[parfill]{parskip}
+\usepackage{bookman}
+\usepackage[small,bf]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+\usepackage{commath}
+\usepackage{titlesec}
+\usepackage{physics}
+\usepackage{courier}
+\usepackage[hang]{footmisc} 
+\usepackage{caption}
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth}
+\AtBeginDocument{\setlength{\rowidth}{3em}}
+
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bfseries R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}} 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\proj}{\mathop{\bf Proj}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\zero}{\mathop{\bf 0}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\bf E{}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} 
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\epi}{\mathop{\bf epi}} 
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} 
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\textit e.g.}}
+\newcommand{\ie}{{\textit i.e.}}
+\newcommand{\etc}{{\it etc.}}
+\bibliographystyle{alpha}
+
+
+
+
+
+\usepackage{titling}
+%\setlength{\droptitle}{-1cm}
+
+
+
+\title{Homework 3 for Physics  503}
+\author{Ashok M. Rao}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+\paragraph{Problem 1}
+ Decomposing $R$ into symmetric and antisymmetric parts as in Carroll (1.84)
+\begin{align}
+\left(R_{(\mu\nu)\rho\sigma} + R_{[\mu\nu]\rho\sigma}\right)\left(R^{(\mu\nu)\rho\sigma} + R^{[\mu\nu]\rho\sigma}\right) = R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}	 =  R_{\nu\mu\rho\sigma}R^{\nu\mu\rho\sigma}	\\
+\left(R_{\mu\nu(\rho\sigma)} + R_{\mu\nu[\rho\sigma]}\right)\left(R^{\mu\nu(\rho\sigma)} + R^{\mu\nu[\rho\sigma]}\right) = R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}	 =  R_{\mu\nu\sigma\rho}R^{\mu\nu\sigma\rho}		
+\end{align}
+See that he non-vanishing terms of the scalar invariant come in sets of four. Since these six components are given, the solution is straightforward and the invariant result is the sum of each of the six given components contracted with the respective dual, $\eg R_{t r t r}R^{t r t r}$, with an additional factor of 4. 
+\begin{align}
+	R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} &= 4\left[\frac{4M^2}{r^6} +\frac{M^2}{r^6} + \frac{M^2}{r^6} + \frac{M^2}{r^6} + \frac{M^2}{r^6} + \frac{4M^2}{r^6}\right]\\
+	&= 4\left(\frac{12M^2}{r^6}\right)
+\end{align}
+This invariant depends only on $r$ and the curvature diverges at the origin as $r\to 0$. Again, the factor 4 follows from equations (1) and (2) which together show that each of the components that don't vanish are included in the contraction four times (as in the four LHS sums in the equations respectively).
+
+
+\paragraph{Problem 3}
+
+As in Carroll (1.114), write $T^{\mu\nu}$ in terms of the 4-velocity and metric,
+\begin{align}
+T^{\mu\nu} &= (\rho + P)U^{\mu}U^{\nu} + P\eta^{\mu\nu}	
+\end{align}
+Onto this, apply the conservation requirement $\partial_{\mu}T^{\mu\nu}=0$
+\begin{align}
+	\partial_{\mu}\left((\rho + P)U^{\mu}U^{\nu} + P\eta^{\mu\nu}\right) &= \partial_\mu[(\rho + P)U^{\mu}]U^{\nu} + [(\rho + P)U^{\mu}]\partial_\mu U^{\nu} + \eta^{\mu\nu}\partial_\mu P
+\end{align}
+Solving this for timelike components reforms to setting $\nu=0$ so that,
+\begin{align}
+\partial_\mu[(\rho + P)U^{\mu}]U^{0} &= -(\rho + P)U^{\mu}\partial_\mu U^{0} - \eta^{\mu 0}\partial_\mu P \\
+\partial_\mu[(\rho + P)U^{\mu}] &= \frac{1}{U^0}\left[-(\rho + P)U^{\mu}\partial_\mu U^{0} + \partial_0 P\right]
+\end{align}
+On spacelike components $\nu=i$, insert (9) into (6) so that
+\begin{align}
+	\frac{1}{U^0}\left[-(\rho + P)U^{\mu}\partial_\mu U^{0} + \partial_0 P\right]U^i + (\rho+P)U^{\mu}\partial_{\mu}U^{i} &= -\eta^{\mu i}\partial_{\mu} P\\
+	(\rho+P)\left[U^{\mu}\partial_{\mu}U^{i}-(U^{\mu}/U^0)\partial_{\mu}U^0 U^i\right]+v^i \pdv{P}{t}   &= -\partial_{i} P
+\end{align}
+The last line may be expressed by letting $v^i= (U^i/U^0)$ as the spatial velocity and writing the operator $(U^\mu/U^0)\partial_\mu$ as in the hint.  Rearranging 
+\begin{align}
+	\left(\pdv{t}+\va{v}\cdot\va{\nabla}\right) \va{v} &= -\frac{1-\va{v}^2}{\rho+P}\left(\va{v} \pdv{P}{t} + \va{\nabla} P\right)
+\end{align}
+As in Carroll (1.100), the 4-velocity is normalized so that $\eta_{\mu\nu}U^{\mu}U^{\nu}=-1$, differentiating which gives $\partial_{\mu}(U_{\nu}U^{\nu}) = 2U_\nu (\partial_\mu U^{\nu}) = 2 (\partial_{\mu} U^{\nu})U_{\nu}	= 0$. Then, using this with the contraction of the RHS of (6) with $U_{\nu}$ gives that 
+\begin{align}
+\partial_\mu[(\rho + P)U^{\mu}]= U^{\mu}\partial_\mu P  
+\end{align}
+The conservation of number current is expressed as
+\begin{align}
+\partial_{\mu}n^{\mu} = \partial_u(n U^{\mu})	= 0
+\end{align}
+Now express the identity in (12) by way of (13)
+\begin{align}
+	\partial_\mu[(\rho + P)U^{\mu}] &= \partial_{\mu}\left[\frac{(\rho+P)n U^{\mu}}{n}\right]\\
+	&= n U^{\mu}\partial_{\mu}\left(\rho\cdot\frac{1}{n} + P\cdot\frac{1}{n}\right) + \frac{(\rho+P)\partial_{\mu}( n U^{\mu})}{n} \\
+	&=nPU^{\mu}\partial_{\mu}\left(\frac{1}{n}\right)+nU^{\mu}\partial_{\mu}\left(\frac{\rho}{n}\right) + U^{\mu}\partial_{\mu}(P) 
+\end{align}
+Both (15) and (16) are just the Leibniz rule. Dividing throughout by $n$ and disregarding the final term, which vanishes, this reduces to
+\begin{align}
+PU^{\mu}\partial_{\mu}\left(1/n\right)+U^{\mu}\partial_{\mu}\left(\rho/ n\right) = 0
+\end{align}
+This is related to the first law of thermodynamics in that
+\begin{align}
+dE + P dV &= T dS \\
+d(\rho/n) + P d(1/n) &= T d(S/n)
+\end{align}
+Given that $U^{\mu}\partial_{\mu} = \gamma\left(\pdv{t}+\va{v}\cdot\va{\nabla}\right)$, as was previously used to express (10) as (11), the relationship between (17) and (19) becomes clear and the constant of proportionality cancels out so that we obtain
+\begin{align}
+U^{\mu}\partial_{\mu} s = \left(\pdv{t} + \va{v}\cdot\va{\nabla}\right) s = 0	
+\end{align}
+The conservation of entropy density per particle under the convective derivative then implies the desired property that there is no dissipation in a perfect fluid.  
+
+
+
+
+
+\paragraph{Problem 4}
+Without loss of generality let the infinite cylinder have unit radius. A point on the manifold is characterized by its polar angle and signed height. Take the image of the signed height coordinate height under some injective $f: (0, \infty)\mapsto \mathbb{R}$ to obtain an infinite cylinder with unsigned height. Let $f=\log(\cdot)$ and define the coordinate map $\varphi: U\mapsto \mathbb{R}^3$
+\begin{align}
+\varphi(u^1, u^2) &= \left(\frac{u^1}{\sqrt{\delta_{ij}u^i u^j}},\frac{u^2}{\sqrt{\delta_{ij}u^i u^j}}, \log\sqrt{\delta_{ij}u^i u^j}\right)
+\end{align}
+where $(U,\varphi)$ a chart whose coordinate domain $U=\mathbb{R}^2/{\mathbf{0}}$ contains $M$ entirely.\footnote{The corresponding inverse map is given by $\varphi^{-1}(x^2, x^2, x^3) = \exponential\{x^3\}\cdot(x^2, x^2)$}
+
+The torus $\mathbb{T}^2 = \mathbb{S}^1 \times \mathbb{S}^1$ has product manifold structure. First represent $S^1$ as 
+\begin{align}
+S^1 &= \left\{(x^1, x^2)\in\mathbb{R}^2 \mid (x^1)^2 + (	x^2)^2=1\right\}
+\end{align}
+Now give the stereographic projections $\varphi_N: U_N\mapsto \mathbb{R}$ and $U_S\mapsto \mathbb{R}$ as
+\begin{align}
+\varphi_N(x) = \frac{x^2}{1-x^1},\quad\varphi_S(x) = \frac{x^2}{1+x^1} 
+\end{align}
+Likewise obtain the inverse
+\begin{align}
+\varphi_{N}^{-1}(u) &= \frac{((u^1)^2 - 1, 2u^1)}{1 + (u^1)^2},\quad \varphi_{S}^{-1}(u) = \frac{(1 - (u^1)^2, 2u^1)}{1 + (u^1)^2}
+\end{align}
+Compute that
+\begin{align*}
+	\varphi_S(\varphi_{N}^{-1}(u)) &= \varphi_N(\varphi_{S}^{-1}(u))= \frac{2u^1/(1+(u^1)^2)}{1 + \frac{1-(u^1)^2}{1+(u^1)^2}} = u^1 
+\end{align*}
+Noting that $(f_1\times f_2)\circ (g_1\times g_2)^{-1} = (f_1\circ g_{1}^{-1})\times (f_2\circ g_{2}^{-1})$, we can conclude that each chart for $\mathbb{T}^2$ has the form $\left(U_i\times U_j, \varphi_i\times \varphi_j\right)$ for $(i, j)\subseteq \{S, N\}\times\{S, N\}$. There are four permutations and thus four charts in the atlas. Express the torus as 
+\begin{align}
+S^1\times S^1 &= \left\{(x^1, x^2, x^3, x^4)\in\mathbb{R}^4 \mid (x^1)^2 + (	x^2)^2=1,(x^3)^2 + (	x^4)^2=R^2\right\}. 
+\end{align}
+Using the fact that $\cos(\arcsin{x}) = \sqrt{1-x^2}$, let $(x^1, x^3) = (\sin\phi, \sin\theta)$ so that each chart may be represented as
+\begin{align}
+\varphi_{(\pm,\pm)}(\phi, \theta) &= \left(\frac{\cos\phi}{1\pm\sin\phi}, \frac{(R + \cos{\phi})\cos{\theta}}{1\pm\sin\theta}\right)	
+\end{align}
+The atlas is given by taking $U = (\phi, \theta)\subseteq [0, 2\pi)^2$ though removing asymptotes, \eg 
+\begin{align} 
+	U_{++} &= U/\left\{3\pi/2,3\pi/2\right\}\\ 
+	U_{-+} &= U/\left\{\pi/2,3\pi/2\right\}
+\end{align}
+and likewise for $U_{+-}$ and $U_{--}$.
+
+\paragraph{Problem 5}
+Write the coordinate expression for the commutator as:
+\begin{align*}
+	\comm{A}{B}f &= A^{\mu}\pdv{x^{\mu}}\left(B^{\nu}\pdv{f}{x^\nu}\right) - B^{\nu}\pdv{x^{\nu}}\left(A^{\mu}\pdv{f}{x^\mu}\right)	\\
+	&= A^{\mu}\pdv{B^{\nu}}{x^{\mu}}\pdv{f}{x^{\nu}} + A^{\mu}B^{\nu}\pdv{f}{x^{\nu}}{x^{\mu}} - B^{\nu}\pdv{A^{\mu}}{x^{\nu}}\pdv{f}{x^{\mu}} - A^{\mu}B^{\nu}\pdv{f}{x^{\mu}}{x^{\nu}}\\
+	&= A^{\mu}\pdv{B^{\nu}}{x^{\mu}}\pdv{f}{x^{\nu}}-B^{\nu}\pdv{A^{\mu}}{x^{\nu}}\pdv{f}{x^{\mu}}
+\end{align*}
+The first line applies the definition of a commutator acting on a differentiable function $f$, the second expresses the Leibniz property, and the final line follows by Young's Theorem ($\eg$ the equality of mixed partials). The component indices on the first term in (11) may be interchanged to obtain that
+\begin{align}
+	\comm{A}{B}f &= A^{\nu}\pdv{B^{\mu}}{x^{\nu}}\pdv{f}{x^{\mu}}-B^{\nu}\pdv{A^{\mu}}{x^{\nu}}\pdv{f}{x^{\mu}}\\
+	&= \left(A^{\nu}\pdv{B^{\mu}}{x^{\nu}}-B^{\nu}\pdv{A^{\mu}}{x^{\nu}}\right)\pdv{f}{x^{\mu}}\\
+	&= \left(A^{\nu}\partial_{\nu}B^{\mu} - B^{\nu}\partial_{\nu}A^{\mu}\right)\partial_{\mu} f
+\end{align}
+Here (14) just applies the definition of the comma derivative as in Carroll (1.54). 
+
+Let $R_x, R_y$, and $R_z$ be generators of infinitesimal rotations respectively about the standard coordinate axes. Rotations in $\mathbb{R}^3$ are elements of the group $SO(3)$ generated by elements of the corresponding algebra $\mathfrak{so}(3)$.  First, express $SO(3)$ as
+\begin{align}
+	SO(3) &= \left\{Q\in\mathbb{R}^{3\times 3}\mid Q^T Q = Q Q^T = I, \det{Q}=1\right\}	
+\end{align}
+Since $SO(3)$ is a matrix group, the exponential map $\exp :\mathfrak{so}(3)\mapsto SO(3)$ may be given by the matrix exponential (which satisfies useful properties like $\exp{tX}\exp{-tX}=I$) so that 
+\begin{align}
+\mathfrak{so}(3) = \left\{\xi\in \mathfrak{gl}(3,\mathbb{R})\mid \exp{t\xi}\in SO(3), t\in\mathbb{R}\right\}	
+\end{align}
+Taylor expanding infinitesimal rotations near the identity makes it clear that $\mathfrak{so}(3)$ is the linear subspace of antisymmetric matrices with unit determinant.\footnote{Observing that, $(I + t\xi)(I + t\xi)^T \approx I + t(\xi + \xi^T) + \mathcal{O}(t^2)	$.
+The condition on the determinant actually doesn't matter as the expansion of $\det{I + t\xi}$ is unit to linear order.} Observe that 
+\begin{align}
+	\vb{u}\cross\vb{v} &= T_{\vb{u}}\vb{v} = -T_{\vb{u}}\vb{u} \qq{where} T_{\vb{e}=(a, b, c)} = \mqty(0&-c&b\\c&0&-a\\-b&a&0)
+\end{align}
+based on the antisymmetry of the cross product. Now the generators $R_x, R_y$, and $R_z$ may be identified respectively with $-T_{\vb{i}}, -T_{\vb{j}}$, and $-T_{\vb{k}}$. Thus we may conclude:
+\begin{align}
+\comm{R_i}{R_j} = -R_k \qq{likewise that} \comm{R_i}{R_j}f = T_{\vb{k}}f 
+\end{align}
+Expressing the vector field as a linear differential operator rotating $S^2$ into itself
+\begin{align*}
+	R_z = -y\partial_x + x\partial_y \leftrightarrow (-y, x, 0)
+\end{align*}
+which is the Cartesian form of the given, \eg $R_z = \pdv*{\phi}$. This can also be obtained by applying the matrix $T$ above to infinitesimal translations. Doing this for the other vectors (or by symmetry in Cartesian coordinates),
+\begin{align*}
+	R_x &= -z\partial_y + y\partial_z \leftrightarrow (z, 0, -x)\\
+	R_y &= z\partial_x - x\partial_z \leftrightarrow (0, -z, y)
+\end{align*}
+The commutator between these fields as defined above agree with the relation given in (35) by inspection. For example see that in computing $[R_x, R_y]$, cross-partials commute to vanish such that $[R_x, R_y]+R_z = 0$. 
+
+
+
+
+\end{document}
